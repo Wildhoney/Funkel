@@ -1,0 +1,27 @@
+{
+  "name": "funkel",
+  "version": "0.1.0",
+  "description": "Simple and lightweight functional toolset inspired by Clojure using import.",
+  "main": "src/funkel.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wildhoney/Funkel.git"
+  },
+  "keywords": [
+    "functional",
+    "clojure",
+    "compose",
+    "identity",
+    "curry",
+    "partial"
+  ],
+  "author": "Adam Timberlake <adam.timberlake@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Wildhoney/Funkel/issues"
+  },
+  "homepage": "https://github.com/Wildhoney/Funkel#readme"
+}
