@@ -24,6 +24,14 @@ export function trace(x) {
  */
 export function curry(f) {
 
+    const argArity = f.length;
+    const args     = [];
+
+    return function curried(x) {
+        args.push(x);
+        return (args.length === argArity) ? f(...args) : curried;
+    };
+
 }
 
 /**

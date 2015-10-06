@@ -13,6 +13,35 @@ describe('Funkel', () => {
 
     });
 
+    describe('Curry', () => {
+
+        it('Should be able to curry a function;', () => {
+            const divideTwoNumbers = f.curry((x, y) => x / y);
+            expect(typeof divideTwoNumbers).toBe('function');
+            expect(divideTwoNumbers(3)(2)).toEqual(1.5);
+        });
+
+        it('Should be able to curry two functions with multiple arguments;', () => {
+
+            const addThreeNumbers = (x, y, z) => x + y + z;
+            const curriedAddThree = f.curry(addThreeNumbers);
+
+            const addTwoNumbers   = (x, y) => x + y;
+            const curriedAddTwo   = f.curry(addTwoNumbers);
+
+            expect(curriedAddThree(1)(2)(3)).toEqual(6);
+            expect(curriedAddTwo(1)(2)).toEqual(3);
+
+        });
+
+        it('Should be able to curry a function in multiple steps;', () => {
+            const multiplyTwoNumbers = f.curry((x, y) => x * y);
+            multiplyTwoNumbers(3);
+            expect(multiplyTwoNumbers(9)).toEqual(27);
+        });
+
+    });
+
     describe('Trace', () => {
 
         it('Should be able to output the given string using `console.log`;', () => {
