@@ -27,8 +27,8 @@ export function curry(f) {
     const argArity = f.length;
     const args     = [];
 
-    return function curried(a) {
-        args.push(a);
+    return function curried(...a) {
+        args.push(...a);
         return (args.length === argArity) ? f(...args) : curried;
     };
 

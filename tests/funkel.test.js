@@ -40,6 +40,11 @@ describe('Funkel', () => {
             expect(multiplyTwoNumbers(9)).toEqual(27);
         });
 
+        it('Should be able to curry with passing more than one argument;', () => {
+            const multiplyAllNumbers = f.curry((a, b, c, d) => a * b * c * d);
+            expect(multiplyAllNumbers(2, 3)(4, 5)).toEqual(120);
+        });
+
     });
 
     describe('Trace', () => {
