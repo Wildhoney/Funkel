@@ -42,5 +42,5 @@ export function partial(f, ...x) {
  * @return {Function}
  */
 export function compose(...fs) {
-
+    return x => fs.reduceRight((acc, f) => f(acc), x);
 }

@@ -52,4 +52,15 @@ describe('Funkel', () => {
 
     });
 
+    describe('Compose', () => {
+
+        it('Should be able to compose a list of functions to be applied sequentially from right-to-left', () => {
+            const addOne          = x => x + 1;
+            const multiplyNumber  = x => x * 2;
+            const processEquation = f.compose(multiplyNumber, addOne);
+            expect(processEquation(2)).toEqual(6);
+        });
+
+    });
+
 });
