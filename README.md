@@ -19,9 +19,9 @@ expect(addTwo(3)).toEqual(5);
 
  > :package: `v0.1.0`
  
- * `identity(a)`;
- * `trace(a)`
- * `curry(f)`
- * `partial(f, ...a)`
- * `compose(...f)`
+ * `identity(a)` > `identity :: a -> a`
+ * `trace(a)` > `trace :: a -> void`
+ * `curry(f)` > `curry :: fn -> fn`
+ * `partial(f, ...a)` > `partial :: fn -> ...a -> fn`
+ * `compose(...f)` > `compose :: ...fn -> fn`
  
