@@ -1,10 +1,19 @@
 /**
+ * @method identity
+ * @param {*} x
+ * @return {*}
+ */
+export function identity(x) {
+    return x;
+}
+
+/**
  * @method trace
  * @param {*} x
  * @return {void}
  */
 export function trace(x) {
-    return x;
+
 }
 
 /**
