@@ -1,20 +1,20 @@
 /**
  * @method identity
- * @param {*} x
+ * @param {*} a
  * @return {*}
  */
-export function identity(x) {
-    return x;
+export function identity(a) {
+    return a;
 }
 
 /**
  * @method trace
- * @param {*} x
+ * @param {*} a
  * @return {void}
  */
-export function trace(x) {
-    const isArrayMap = (x) => Array.isArray(x) && (typeof x[0] === 'object');
-    (isArrayMap(x) ? console.table : console.log)(x);
+export function trace(a) {
+    const isArrayMap = (a) => Array.isArray(a) && (typeof a[0] === 'object');
+    (isArrayMap(a) ? console.table : console.log)(a);
 }
 
 /**
@@ -27,8 +27,8 @@ export function curry(f) {
     const argArity = f.length;
     const args     = [];
 
-    return function curried(x) {
-        args.push(x);
+    return function curried(a) {
+        args.push(a);
         return (args.length === argArity) ? f(...args) : curried;
     };
 
@@ -37,11 +37,11 @@ export function curry(f) {
 /**
  * @method partial
  * @param {Function} f
- * @param {Array} x
+ * @param {Array} a
  * @return {Function}
  */
-export function partial(f, ...x) {
-    return f.bind(null, ...x);
+export function partial(f, ...a) {
+    return f.bind(null, ...a);
 }
 
 /**
@@ -50,5 +50,5 @@ export function partial(f, ...x) {
  * @return {Function}
  */
 export function compose(...fs) {
-    return x => fs.reduceRight((acc, f) => f(acc), x);
+    return a => fs.reduceRight((acc, f) => f(acc), a);
 }
