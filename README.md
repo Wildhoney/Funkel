@@ -1,2 +1,3 @@
-# Funkel
-Simple and lightweight functional toolset inspired by Clojure using import.
+![Funkel](media/logo.png)
+
+> Simple and lightweight functional toolset inspired by Clojure using import.
