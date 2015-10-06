@@ -14,8 +14,7 @@ export function identity(x) {
  */
 export function trace(x) {
     const isArrayMap = (x) => Array.isArray(x) && (typeof x[0] === 'object');
-    const logMethod  = isArrayMap(x) ? 'table' : 'log';
-    console[logMethod](x);
+    (isArrayMap(x) ? console.table : console.log)(x);
 }
 
 /**
