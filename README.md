@@ -30,7 +30,7 @@ expect(addTwo(3)).toEqual(5);
 
 Below are a set of examples for using `Funkel` &ndash; although it's not an exhaustive list, and you should refer to the source and/or associated unit-tests if you need further information about what `Funkel` provides and how it functions.
 
-**`trace`**
+### `trace`
 
 If you have a `compose`d function but are having troubles, it's useful to `console.log` the current value at any given step, for these cases use `trace` in the `compose` function:
 
