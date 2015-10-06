@@ -15,7 +15,7 @@ const addTwo     = partial(addNumbers, 2);
 expect(addTwo(3)).toEqual(5);
 ```
 
-# Releases
+### Releases
 
  > :package: `v0.1.0`
  
