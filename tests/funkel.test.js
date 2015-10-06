@@ -35,4 +35,21 @@ describe('Funkel', () => {
 
     });
 
+    describe('Partial', () => {
+
+        it('Should be able to partially apply a given function;', () => {
+            const addTwoNumbers = (x, y) => x + y;
+            const addFive       = f.partial(addTwoNumbers, 5);
+            expect(typeof addFive).toBe('function');
+            expect(addFive(2)).toEqual(7);
+        });
+
+        it('Should be able to partially apply a variadic function;', () => {
+            const addAllNumbers = (...xs) => xs.reduce((acc, x) => acc += x, 0);
+            const addNumbers    = f.partial(addAllNumbers, 1, 2, 3);
+            expect(addNumbers(4)).toEqual(10);
+        });
+
+    });
+
 });

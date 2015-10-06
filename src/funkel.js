@@ -29,10 +29,11 @@ export function curry(f) {
 /**
  * @method partial
  * @param {Function} f
+ * @param {Array} x
  * @return {Function}
  */
-export function partial(f) {
-
+export function partial(f, ...x) {
+    return f.bind(null, ...x);
 }
 
 /**
