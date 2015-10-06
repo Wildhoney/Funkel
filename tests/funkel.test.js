@@ -25,7 +25,7 @@ describe('Funkel', () => {
 
             spyOn(console, 'log');
             spyOn(console, 'table');
-            
+
             const model = [{ name: 'Adam', age: 29 }, { name: 'Maria', age: 24 }];
             f.trace(model);
             expect(console.log).not.toHaveBeenCalled();
