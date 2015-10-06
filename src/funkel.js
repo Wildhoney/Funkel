@@ -10,11 +10,12 @@ export function identity(a) {
 /**
  * @method trace
  * @param {*} a
- * @return {void}
+ * @return {*}
  */
 export function trace(a) {
     const isArrayMap = (a) => Array.isArray(a) && (typeof a[0] === 'object');
     (isArrayMap(a) ? console.table : console.log)(a);
+    return identity(a);
 }
 
 /**
@@ -27,6 +28,11 @@ export function curry(f) {
     const argArity = f.length;
     const args     = [];
 
+    /**
+     * @method curried
+     * @param {*} a
+     * @return {Function|*}
+     */
     return function curried(...a) {
         args.push(...a);
         return (args.length === argArity) ? f(...args) : curried;

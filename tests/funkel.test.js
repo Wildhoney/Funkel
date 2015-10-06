@@ -51,7 +51,7 @@ describe('Funkel', () => {
 
         it('Should be able to output the given string using `console.log`;', () => {
             spyOn(console, 'log');
-            f.trace('Adam');
+            expect(f.trace('Adam')).toEqual('Adam');
             expect(console.log).toHaveBeenCalled();
         });
 
@@ -61,7 +61,7 @@ describe('Funkel', () => {
             spyOn(console, 'table');
 
             const model = [{ name: 'Adam', age: 29 }, { name: 'Maria', age: 24 }];
-            f.trace(model);
+            expect(f.trace(model)).toEqual(model);
             expect(console.log).not.toHaveBeenCalled();
             expect(console.table).toHaveBeenCalled();
 
@@ -90,9 +90,18 @@ describe('Funkel', () => {
 
         it('Should be able to compose a list of functions to be applied sequentially from right-to-left', () => {
             const addOne          = a => a + 1;
-            const multiplyNumber  = a => a * 2;
-            const processEquation = f.compose(multiplyNumber, addOne);
+            const multipleByTwo   = a => a * 2;
+            const processEquation = f.compose(multipleByTwo, addOne);
             expect(processEquation(2)).toEqual(6);
+        });
+
+        it('Should be able to use trace to debug composed functions;', () => {
+            const addTwo          = a => a + 2;
+            const multiplyByThree = a => a * 3;
+            const processEquation = f.compose(addTwo, f.trace, multiplyByThree);
+            spyOn(console, 'log');
+            expect(processEquation(3)).toEqual(11);
+            expect(console.log).toHaveBeenCalledWith(9);
         });
 
     });
