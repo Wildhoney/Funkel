@@ -15,7 +15,7 @@ const addTwo     = partial(addNumbers, 2);
 expect(addTwo(3)).toEqual(5);
 ```
 
-### Releases
+## Releases
 
  > :package: `v0.1.0`
  
@@ -25,3 +25,15 @@ expect(addTwo(3)).toEqual(5);
  * `partial(f, ...a)`
  * `compose(...f)`
  
+ 
+# Examples
+
+Below are a set of examples for using `Funkel` &ndash; although it's not an exhaustive list, and you should refer to the source and/or associated unit-tests if you need further information about what `Funkel` provides and how it functions.
+
+### Debugging `compose` with `trace`
+
+If you have a `compose`d function but are having troubles, it's useful to `console.log` the current value at any given step, for these cases use `trace` in the `compose` function:
+
+```javascript
+const pay = compose(printInvoice, f.trace, sendMoney, createOrder);
+```
