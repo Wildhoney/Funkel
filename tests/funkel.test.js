@@ -36,8 +36,8 @@ describe('Funkel', () => {
 
         it('Should be able to curry a function in multiple steps;', () => {
             const multiplyTwoNumbers = f.curry((a, b) => a * b);
-            multiplyTwoNumbers(3);
-            expect(multiplyTwoNumbers(9)).toEqual(27);
+            const multiplyByThree    = multiplyTwoNumbers(3);
+            expect(multiplyByThree(9)).toEqual(27);
         });
 
         it('Should be able to curry with passing more than one argument;', () => {

@@ -26,16 +26,17 @@ export function trace(a) {
 export function curry(f) {
 
     const argArity = f.length;
-    const args     = [];
 
-    /**
-     * @method curried
-     * @param {*} a
-     * @return {Function|*}
-     */
     return function curried(...a) {
-        args.push(...a);
-        return (args.length === argArity) ? f(...args) : curried;
+
+        if (a.length >= argArity) {
+            return f.apply(null, a);
+        }
+
+        return (...b) => {
+            return curried.apply(null, a.concat(b));
+        };
+
     };
 
 }
