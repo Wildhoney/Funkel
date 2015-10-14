@@ -30,7 +30,7 @@ export function curry(f) {
     return function curried(...a) {
 
         if (a.length >= argArity) {
-            return f.apply(null, a);
+            return f(...a);
         }
 
         return (...b) => {
