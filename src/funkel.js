@@ -34,7 +34,7 @@ export function curry(f) {
         }
 
         return (...b) => {
-            return curried.apply(null, a.concat(b));
+            return curried(...[...a, ...b]);
         };
 
     };
