@@ -106,4 +106,23 @@ describe('Funkel', () => {
 
     });
 
+    describe('Memoize', () => {
+
+        it('Should be able to memoize a referentially transparent function;', () => {
+
+            const spy = { fn: (x, y) => x + y };
+            spyOn(spy, 'fn').and.callThrough();
+
+            const addNumbers = f.memoize(spy.fn);
+            expect(addNumbers(1, 2)).toEqual(3);
+            expect(spy.fn.calls.count()).toEqual(1);
+            expect(addNumbers(1, 2)).toEqual(3);
+            expect(spy.fn.calls.count()).toEqual(1);
+            expect(addNumbers(3, 4)).toEqual(7);
+            expect(spy.fn.calls.count()).toEqual(2);
+
+        });
+
+    });
+
 });

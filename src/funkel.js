@@ -59,3 +59,27 @@ export function partial(f, ...a) {
 export function compose(...fs) {
     return a => fs.reduceRight((acc, f) => f(acc), a);
 }
+
+/**
+ * @method memoize
+ * @param {Function} fn
+ * @return {Function}
+ */
+export function memoize(fn) {
+
+    const cache = new Map();
+
+    return (...args) => {
+
+        const key    = JSON.stringify(args);
+        const cached = cache.get(key);
+
+        return cached ? cached : (() => {
+            const value = fn(...args);
+            cache.set(key, value);
+            return value;
+        })();
+
+    };
+
+}
