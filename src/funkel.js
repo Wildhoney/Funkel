@@ -53,11 +53,15 @@ export function partial(f, ...a) {
 
 /**
  * @method compose
- * @param {Function[]} fs
+ * @param {Function[]} fns
  * @return {Function}
  */
-export function compose(...fs) {
-    return a => fs.reduceRight((acc, f) => f(acc), a);
+export function compose(...fns) {
+
+    return function(a) {
+        return fns.reduceRight((acc, fn) => fn.call(this, acc), a);
+    };
+
 }
 
 /**
