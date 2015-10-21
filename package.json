@@ -1,6 +1,6 @@
 {
   "name": "funkel",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Simple and lightweight functional toolset inspired by Clojure using import.",
   "main": "src/funkel.js",
   "scripts": {
