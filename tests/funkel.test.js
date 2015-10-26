@@ -125,4 +125,13 @@ describe('Funkel', () => {
 
     });
 
+    describe('Pluck', () => {
+
+        it('Should be able to pluck keys from the array of objects;', () => {
+            const user = [{ name: 'Adam', age: 30 }, { name: 'Maria', age: 24 }];
+            expect(f.pluck(user, 'name')).toEqual(['Adam', 'Maria']);
+        });
+
+    });
+
 });

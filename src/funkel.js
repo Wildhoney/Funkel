@@ -87,3 +87,18 @@ export function memoize(fn) {
     };
 
 }
+
+/**
+ * @method pluck
+ * @param {Object} model
+ * @param {String} keys
+ * @return
+ */
+export function pluck(model, ...keys) {
+
+    return model.map(item => {
+        //const key = keys[0];
+        return item[keys[0]];
+    });
+
+}
