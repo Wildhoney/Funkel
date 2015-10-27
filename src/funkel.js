@@ -66,7 +66,19 @@ export function curry(fn) {
  * @return {Function}
  */
 export function partial(fn, ...a) {
-    return fn.bind(null, ...a);
+
+    const partialFn = fn.bind(null, ...a);
+
+    /**
+     * @method toString
+     * @type {Function}
+     */
+    partialFn.toString = () => {
+        return `${fn.toString()}(${a.join(', ')})`;
+    };
+
+    return partialFn;
+
 }
 
 /**

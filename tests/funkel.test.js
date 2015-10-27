@@ -166,6 +166,12 @@ describe('Funkel', () => {
 
         });
 
+        it('Partial: Should be able to show the original function instead of the partial internals;', () => {
+            const division = (a, b, c) => a / b / c;
+            const divideByTwoAndThree = f.partial(division, 2, 3);
+            expect(divideByTwoAndThree.toString()).toEqual(`${division.toString()}(2, 3)`);
+        });
+
     });
 
 });
