@@ -148,6 +148,6 @@ export function pluck(model, key) {
  * @param {Function} fn
  * @return {String}
  */
-function functionToString(fn) {
+export function functionToString(fn) {
     return fn.name ? fn.name : fn.toString();
 }

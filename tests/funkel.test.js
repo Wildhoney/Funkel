@@ -174,4 +174,25 @@ describe('Funkel', () => {
 
     });
 
+    describe('Helpers', () => {
+
+        it('Should be able to return the function name, otherwise the function body;', () => {
+
+            const first  = function first() { return 2 + 2; };
+            const second = function() { return 2 + 2; };
+            const third  = () => 2 + 2;
+            function fourth() { return 2 + 2; }
+
+            expect(f.functionToString(first)).toEqual('first');
+            expect(f.functionToString(second)).toEqual('second');
+            expect(f.functionToString(third)).toEqual('third');
+            expect(f.functionToString(fourth)).toEqual('fourth');
+            expect(f.functionToString(function() {
+                return 2 + 2;
+            })).toEqual(function() { return 2 + 2; }.toString());
+
+        });
+
+    });
+
 });
