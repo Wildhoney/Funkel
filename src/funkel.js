@@ -20,35 +20,53 @@ export function trace(a) {
 
 /**
  * @method curry
- * @param {Function} f
+ * @param {Function} fn
  * @return {Function}
  */
-export function curry(f) {
+export function curry(fn) {
 
-    const argArity = f.length;
+    const argArity = fn.length;
 
-    return function curried(...a) {
+    function curriedFn(...a) {
 
         if (a.length >= argArity) {
-            return f(...a);
+            return fn(...a);
         }
 
-        return (...b) => {
-            return curried(...[...a, ...b]);
+        function internalCurriedFn(...b) {
+            return curriedFn(...[...a, ...b]);
+        }
+
+        /**
+         * @method toString
+         * @return {String}
+         */
+        internalCurriedFn.toString = function() {
+            return `${functionToString(fn)}(${a.join(', ')})`;
         };
 
-    };
+        return internalCurriedFn;
+
+    }
+
+    /**
+     * @method toString
+     * @return {String}
+     */
+    curriedFn.toString = () => functionToString(fn);
+
+    return curriedFn;
 
 }
 
 /**
  * @method partial
- * @param {Function} f
+ * @param {Function} fn
  * @param {Array} a
  * @return {Function}
  */
-export function partial(f, ...a) {
-    return f.bind(null, ...a);
+export function partial(fn, ...a) {
+    return fn.bind(null, ...a);
 }
 
 /**
@@ -58,9 +76,17 @@ export function partial(f, ...a) {
  */
 export function compose(...fns) {
 
-    return function(a) {
+    const composeFn = function(a) {
         return fns.reduceRight((acc, fn) => fn.call(this, acc), a);
     };
+
+    /**
+     * @method toString
+     * @return {String}
+     */
+    composeFn.toString = () => `compose(${fns.map(fn => fn.toString()).join(', ')})`;
+
+    return composeFn;
 
 }
 
@@ -90,6 +116,7 @@ export function memoize(fn) {
      * @return {String}
      */
     memoizeFn.toString = () => fn.toString();
+
     return memoizeFn
 
 }
@@ -102,4 +129,13 @@ export function memoize(fn) {
  */
 export function pluck(model, key) {
     return model.map(item => item[key]);
+}
+
+/**
+ * @method functionToString
+ * @param {Function} fn
+ * @return {String}
+ */
+function functionToString(fn) {
+    return fn.name ? fn.name : fn.toString();
 }

@@ -136,12 +136,33 @@ describe('Funkel', () => {
 
     describe('Debugging', () => {
 
-        describe('Memoize', () => {
+        it('Memoize: Should be able to show the original function instead of the memoize internals;', () => {
+            const divideNumbers = (a, b) => a / b;
+            expect(divideNumbers.toString()).toEqual(f.memoize(divideNumbers).toString());
+        });
 
-            it('Should be able to show the original function instead of the memoize internals;', () => {
-                const divideNumbers = (a, b) => a / b;
-                expect(divideNumbers.toString()).toEqual(f.memoize(divideNumbers).toString());
-            });
+        it('Compose: Should be able to show the original function instead of the compose internals;', () => {
+
+            const incrementFive = x => x + 5;
+            const doubleNumber  = x => x * 2;
+            const composedFn    = f.compose(incrementFive, doubleNumber);
+
+            expect(composedFn.toString()).toEqual(
+                `compose(${[incrementFive.toString(), doubleNumber.toString()].join(', ')})`
+            );
+
+        });
+
+        it('Curry: Should be able to show the original function instead of the curry internals;', () => {
+
+            const divideThreeNumbers = f.curry((a, b, c) => a / b / c);
+            expect(divideThreeNumbers.toString()).toEqual(divideThreeNumbers.toString());
+
+            const divideTwoNumbers = divideThreeNumbers(2);
+            expect(divideTwoNumbers.toString()).toEqual(`${divideThreeNumbers.toString()}(2)`);
+
+            const divideOneNumber = divideTwoNumbers(1);
+            expect(divideOneNumber.toString()).toEqual(`${divideThreeNumbers.toString()}(2, 1)`);
 
         });
 
