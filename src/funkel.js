@@ -91,14 +91,9 @@ export function memoize(fn) {
 /**
  * @method pluck
  * @param {Object} model
- * @param {String} keys
+ * @param {String} key
  * @return
  */
-export function pluck(model, ...keys) {
-
-    return model.map(item => {
-        //const key = keys[0];
-        return item[keys[0]];
-    });
-
+export function pluck(model, key) {
+    return model.map(item => item[key]);
 }
