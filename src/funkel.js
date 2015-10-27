@@ -71,9 +71,8 @@ export function compose(...fns) {
  */
 export function memoize(fn) {
 
-    const cache = new Map();
-
-    return (...args) => {
+    const cache     = new Map();
+    const memoizeFn = (...args) => {
 
         const key    = JSON.stringify(args);
         const cached = cache.get(key);
@@ -85,6 +84,13 @@ export function memoize(fn) {
         })();
 
     };
+
+    /**
+     * @method toString
+     * @return {String}
+     */
+    memoizeFn.toString = () => fn.toString();
+    return memoizeFn
 
 }
 

@@ -112,8 +112,8 @@ describe('Funkel', () => {
 
             const spy = { fn: (x, y) => x + y };
             spyOn(spy, 'fn').and.callThrough();
-
             const addNumbers = f.memoize(spy.fn);
+
             expect(addNumbers(1, 2)).toEqual(3);
             expect(spy.fn.calls.count()).toEqual(1);
             expect(addNumbers(1, 2)).toEqual(3);
@@ -130,6 +130,19 @@ describe('Funkel', () => {
         it('Should be able to pluck keys from the array of objects;', () => {
             const user = [{ name: 'Adam', age: 30 }, { name: 'Maria', age: 24 }];
             expect(f.pluck(user, 'name')).toEqual(['Adam', 'Maria']);
+        });
+
+    });
+
+    describe('Debugging', () => {
+
+        describe('Memoize', () => {
+
+            it('Should be able to show the original function instead of the memoize internals;', () => {
+                const divideNumbers = (a, b) => a / b;
+                expect(divideNumbers.toString()).toEqual(f.memoize(divideNumbers).toString());
+            });
+
         });
 
     });
