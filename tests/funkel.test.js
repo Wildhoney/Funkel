@@ -134,6 +134,16 @@ describe('Funkel', () => {
 
     });
 
+    describe('Once', () => {
+
+        it('Should be able to invoke the function once;', () => {
+            const addNumbers = f.once((a, b, c) => a + b + c);
+            expect(addNumbers(1, 2, 3)).toEqual(6);
+            expect(addNumbers(1, 2, 3)).toBeUndefined();
+        });
+
+    });
+
     describe('Debugging', () => {
 
         it('Memoize: Should be able to show the original function instead of the memoize internals;', () => {
@@ -170,6 +180,12 @@ describe('Funkel', () => {
             const division = (a, b, c) => a / b / c;
             const divideByTwoAndThree = f.partial(division, 2, 3);
             expect(divideByTwoAndThree.toString()).toEqual(`${division.toString()}(2, 3)`);
+        });
+
+        it('Once: Should be able to show the original function instead of the once internals;', () => {
+            const multiply = (a, b, c) => a * b * c;
+            const oneTimesTwoTimesThree = f.once(multiply);
+            expect(oneTimesTwoTimesThree.toString()).toEqual(multiply.toString());
         });
 
     });

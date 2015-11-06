@@ -13,9 +13,12 @@ export function identity(a) {
  * @return {*}
  */
 export function trace(a) {
+
     const isArrayMap = (a) => Array.isArray(a) && (typeof a[0] === 'object');
     (isArrayMap(a) ? console.table : console.log)(a);
+
     return identity(a);
+
 }
 
 /**
@@ -128,7 +131,6 @@ export function memoize(fn) {
      * @return {String}
      */
     memoizeFn.toString = () => fn.toString();
-
     return memoizeFn
 
 }
@@ -141,6 +143,29 @@ export function memoize(fn) {
  */
 export function pluck(model, key) {
     return model.map(item => item[key]);
+}
+
+/**
+ * @method once
+ * @param {Function} fn
+ * @return {Function}
+ */
+export function once(fn) {
+
+    let invoked  = false;
+    const onceFn = (...args) => {
+        const value = invoked ? (() => {})() : fn(...args);
+        invoked = true;
+        return value;
+    };
+
+    /**
+     * @method toString
+     * @return {String}
+     */
+    onceFn.toString = () => fn.toString();
+    return onceFn;
+
 }
 
 /**
