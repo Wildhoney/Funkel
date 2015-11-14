@@ -45,7 +45,7 @@ export function curry(fn) {
          * @return {String}
          */
         internalCurriedFn.toString = function() {
-            return `${functionToString(fn)}(${a.join(', ')})`;
+            return `${functionId(fn)}(${a.join(', ')})`;
         };
 
         return internalCurriedFn;
@@ -56,7 +56,7 @@ export function curry(fn) {
      * @method toString
      * @return {String}
      */
-    curriedFn.toString = () => functionToString(fn);
+    curriedFn.toString = () => functionId(fn);
 
     return curriedFn;
 
@@ -169,10 +169,10 @@ export function once(fn) {
 }
 
 /**
- * @method functionToString
+ * @method functionId
  * @param {Function} fn
  * @return {String}
  */
-export function functionToString(fn) {
+export function functionId(fn) {
     return fn.name ? fn.name : fn.toString();
 }
