@@ -17,14 +17,14 @@ expect(addTwo(3)).toEqual(5);
 
 ## Releases
 
- > :package: `v0.1.0`
+ > :package: `v0.1.x`
  
  * `identity(a)`
  * `trace(a)`
- * `curry(f)`
- * `partial(f, ...a)`
- * `compose(...f)`
- 
+ * `curry(fn)`
+ * `partial(fn, ...a)`
+ * `compose(...fns)`
+ * `composeDeferred(...fns)`
  
 # Examples
 
@@ -36,4 +36,22 @@ If you have a `compose`d function but are having troubles, it's useful to `conso
 
 ```javascript
 const pay = compose(printInvoice, f.trace, sendMoney, createOrder);
+```
+
+# Promise-Safe Composing
+
+For cases where you have functions that return promises, you can use the `composeDeferred` function.
+
+```javascript
+import {composeDeferred} from 'funkel';
+
+const addOne   = a => new Promise(resolve => resolve(a + 1));
+const addTwo   = a => a + 2;
+const addThree = a => new Promise(resolve => resolve(a + 3));
+
+const composedFn = composeDeferred(addOne, addTwo, addEleven);
+
+composedFn(0).then(result => {
+    expect(result).toEqual(6);
+});
 ```
