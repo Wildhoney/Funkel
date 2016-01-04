@@ -104,6 +104,32 @@ describe('Funkel', () => {
             expect(console.log).toHaveBeenCalledWith(9);
         });
 
+        describe('Promise-safe', () => {
+
+            it('Should be able to compose with promises', done => {
+
+                const addOne = a => new Promise(resolve => {
+                    resolve(a + 1);
+                });
+
+                const addEleven = a => new Promise(resolve => {
+                    resolve(a + 11);
+                });
+
+                const addTwo = a => a + 2;
+
+                const processEquation = f.composeDeferred(addOne, addTwo, addEleven);
+
+                processEquation(5).then(result => {
+                    expect(result).toEqual(19);
+                    done();
+                });
+
+
+            });
+
+        });
+
     });
 
     describe('Memoize', () => {
@@ -199,11 +225,11 @@ describe('Funkel', () => {
             const third  = () => 2 + 2;
             function fourth() { return 2 + 2; }
 
-            expect(f.functionToString(first)).toEqual('first');
-            expect(f.functionToString(second)).toEqual('second');
-            expect(f.functionToString(third)).toEqual('third');
-            expect(f.functionToString(fourth)).toEqual('fourth');
-            expect(f.functionToString(function() {
+            expect(f.functionId(first)).toEqual('first');
+            expect(f.functionId(second)).toEqual('second');
+            expect(f.functionId(third)).toEqual('third');
+            expect(f.functionId(fourth)).toEqual('fourth');
+            expect(f.functionId(function() {
                 return 2 + 2;
             })).toEqual(function() { return 2 + 2; }.toString());
 

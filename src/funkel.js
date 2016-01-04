@@ -92,7 +92,48 @@ export function partial(fn, ...a) {
 export function compose(...fns) {
 
     const composeFn = function(a) {
-        return fns.reduceRight((acc, fn) => fn.call(this, acc), a);
+        return fns.reduceRight((accumulator, fn) => fn.call(this, accumulator), a);
+    };
+
+    /**
+     * @method toString
+     * @return {String}
+     */
+    composeFn.toString = () => `compose(${fns.map(fn => fn.toString()).join(', ')})`;
+
+    return composeFn;
+
+}
+
+/**
+ * @method composeDeferred
+ * @param {Function[]} fns
+ * @return {Promise}
+ */
+export function composeDeferred(...fns) {
+
+    const composeFn = function(a) {
+
+        return new Promise(resolve => {
+
+            const next = (accumulator, index = fns.length - 1) => {
+
+                if (!~index) {
+                    return void resolve(accumulator);
+                }
+
+                const r = fns[index].call(this, accumulator);
+
+                Promise.resolve(r).then(x => {
+                    next(x, index - 1);
+                });
+
+            };
+
+            next(a);
+
+        });
+
     };
 
     /**
