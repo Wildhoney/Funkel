@@ -92,7 +92,7 @@ export function partial(fn, ...a) {
 export function compose(...fns) {
 
     const composeFn = function(a) {
-        return fns.reduceRight((accumulator, fn) => fn.call(this, accumulator), a);
+        return fns.reduceRight((accumulator, fn) => this::fn(accumulator), a);
     };
 
     /**
@@ -122,7 +122,7 @@ export function composeDeferred(...fns) {
                     return void resolve(accumulator);
                 }
 
-                const r = fns[index].call(this, accumulator);
+                const r = this::fns[index](accumulator);
 
                 Promise.resolve(r).then(x => {
                     next(x, index - 1);
