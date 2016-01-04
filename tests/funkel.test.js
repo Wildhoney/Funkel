@@ -108,15 +108,9 @@ describe('Funkel', () => {
 
             it('Should be able to compose with promises', done => {
 
-                const addOne = a => new Promise(resolve => {
-                    resolve(a + 1);
-                });
-
-                const addEleven = a => new Promise(resolve => {
-                    resolve(a + 11);
-                });
-
-                const addTwo = a => a + 2;
+                const addOne    = a => new Promise(resolve => resolve(a + 1));
+                const addTwo    = a => a + 2;
+                const addEleven = a => new Promise(resolve => resolve(a + 11));
 
                 const processEquation = f.composeDeferred(addOne, addTwo, addEleven);
 
@@ -124,7 +118,6 @@ describe('Funkel', () => {
                     expect(result).toEqual(19);
                     done();
                 });
-
 
             });
 
