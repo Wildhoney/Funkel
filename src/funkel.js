@@ -123,10 +123,7 @@ export function composeDeferred(...fns) {
                 }
 
                 const r = this::fns[index](accumulator);
-
-                Promise.resolve(r).then(x => {
-                    next(x, index - 1);
-                });
+                Promise.resolve(r).then(x => next(x, index - 1));
 
             };
 
