@@ -4,7 +4,8 @@
   "description": "Simple and lightweight functional toolset inspired by Clojure using import.",
   "main": "dist/funkel.js",
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp test",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
