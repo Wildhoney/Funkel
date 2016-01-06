@@ -5,6 +5,7 @@ module.exports = {
     output: {
         path: __dirname + '/dist',
         filename: 'funkel.js',
+	library: "funkel",
         libraryTarget: 'commonjs2'
     },
     module: {
