@@ -1,3 +1,5 @@
+import Map from 'es6-map';
+
 /**
  * @method identity
  * @param {*} a
